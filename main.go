@@ -26,7 +26,7 @@ var (
 )
 
 func main() {
-	err = godotenv.Load("local.env")
+	err := godotenv.Load("local.env")
 	if err != nil {
 		log.Printf("please consider environment variables: %s\n", err)
 	}
@@ -36,8 +36,8 @@ func main() {
 		panic("failed to connect database")
 	}
 
-	if err :=db.AutoMigrate(&todo.Todo{});err != nil {
-		log.Println("auto migrate db",err)
+	if err := db.AutoMigrate(&todo.Todo{}); err != nil {
+		log.Println("auto migrate db", err)
 	}
 
 	r := gin.Default()
@@ -62,7 +62,6 @@ func main() {
 			"buildtime":   buildtime,
 		})
 	})
-
 
 	handler := todo.NewTodoHandler(db)
 	r.POST("/todos", handler.NewTask)
